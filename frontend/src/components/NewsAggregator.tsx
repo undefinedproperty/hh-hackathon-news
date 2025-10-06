@@ -186,7 +186,7 @@ export default function NewsAggregator({ searchQuery = '', onSearchChange, onNav
           url: `/news/search?${params}`
         });
 
-        const response = await authService.fetchWithAuth(`/news/search?${params}`)
+        const response = isAuthenticated ? await authService.fetchWithAuth(`/news/search?${params}`) : await authService.fetchNoAuth(`/news/search?${params}`)
         if (!response.ok) {
           throw new Error(`Search failed: ${response.statusText}`)
         }
